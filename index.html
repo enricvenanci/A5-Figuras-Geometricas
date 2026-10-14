@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calculadora de figuras</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="figuras.js" defer></script>
+</head>
+<body>
+    <main class="card">
+        <p class="eyebrow">Geometría · Programación orientada a objetos</p>
+        <h1>Calculadora de figuras</h1>
+        <p class="intro">Elige una figura para calcular su área y su perímetro.</p>
+
+        <form action="input.php" method="post" data-selection-form>
+            <input type="hidden" name="accion" value="seleccionar">
+            <label for="tipoFigura">Tipo de figura</label>
+            <select id="tipoFigura" name="tipoFigura" required>
+                <option value="" disabled selected>Selecciona una figura</option>
+                <option value="Triangulo">Triángulo</option>
+                <option value="Rectangulo">Rectángulo</option>
+                <option value="Cuadrado">Cuadrado</option>
+                <option value="Circulo">Círculo</option>
+            </select>
+            <small class="field-error" data-error-for="tipoFigura" aria-live="polite"></small>
+            <button type="submit">Continuar</button>
+        </form>
+    </main>
+</body>
+</html>
