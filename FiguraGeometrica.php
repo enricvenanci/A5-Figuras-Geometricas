@@ -35,11 +35,8 @@ class FiguraGeometrica{
         return 0;
     }
 
-    public function toString(){
+    public function __toString(){
         return $this->getTipoFigura() . ' de medida ' . $this->getLado1();
     }
 
-    public function __toString(){
-        return $this->toString();
-    }
 }

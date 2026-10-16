@@ -16,11 +16,8 @@ class Circulo extends FiguraGeometrica{
         return 2 * pi() * $this->getLado1();
     }
 
-    public function toString(){
+    public function __toString(){
         return 'El radio de este círculo es de ' . $this->getLado1() . ' cm.';
     }
 
-    public function __toString(){
-        return $this->toString();
-    }
 }

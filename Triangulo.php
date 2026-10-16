@@ -44,12 +44,7 @@ class Triangulo extends FiguraGeometrica{
         return $this->getLado1() + $this->getLado2() + $this->getLado3();
     }
 
-    public function toString(){
-        return 'Triángulo con 3 lados de longitudes ' . $this->getLado1() . ', '
-            . $this->getLado2() . ' y ' . $this->getLado3() . ' cm.';
-    }
-
     public function __toString(){
-        return $this->toString();
+        return 'Triángulo con 3 lados de longitudes ' . $this->getLado1() . ', '. $this->getLado2() . ' y ' . $this->getLado3() . ' cm.';
     }
 }

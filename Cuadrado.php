@@ -16,11 +16,8 @@ class Cuadrado extends FiguraGeometrica{
         return 4 * $this->getLado1();
     }
 
-    public function toString(){
+    public function __toString(){
         return 'Los lados de este cuadrado miden ' . $this->getLado1() . ' cm.';
     }
 
-    public function __toString(){
-        return $this->toString();
-    }
 }

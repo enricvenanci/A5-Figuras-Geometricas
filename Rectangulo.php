@@ -27,11 +27,7 @@ class Rectangulo extends FiguraGeometrica{
         return 2 * ($this->getLado1() + $this->getLado2());
     }
 
-    public function toString(){
-        return 'La longitud de los lados de este rectángulo es de  ' . $this->getLado1() . ' y ' . $this->getLado2() . ' cm.';
-    }
-
     public function __toString(){
-        return $this->toString();
+        return 'La longitud de los lados de este rectángulo es de  ' . $this->getLado1() . ' y ' . $this->getLado2() . ' cm.';
     }
 }
