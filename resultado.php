@@ -37,7 +37,7 @@ if ($tipo === 'Triangulo') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Resultados</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css?v=20261016">
 </head>
 <body>
     <header class="selection-header">Figura seleccionada: <strong><?= htmlspecialchars($figura->getTipoFigura(), ENT_QUOTES, 'UTF-8') ?></strong></header>
@@ -46,8 +46,10 @@ if ($tipo === 'Triangulo') {
         <p><?= htmlspecialchars($figura->__toString(), ENT_QUOTES, 'UTF-8') ?></p>
         <p>Área: <strong><?= number_format($figura->calcularArea(), 2, ',', '.') ?></strong> cm²</p>
         <p>Perímetro: <strong><?= number_format($figura->calcularPerimetro(), 2, ',', '.') ?></strong> cm</p>
-        <a class="button-link" href="input.php">Cambiar medidas</a>
-        <a class="back-link" href="index.html">Elegir otra figura</a>
+        <nav class="result-actions" aria-label="Acciones del resultado">
+            <a class="button-link" href="input.php">Cambiar medidas</a>
+            <a class="button-link button-link-secondary" href="index.html">Elegir otra figura</a>
+        </nav>
     </main>
 </body>
 </html>

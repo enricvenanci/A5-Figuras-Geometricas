@@ -66,7 +66,7 @@ if (isset($_POST['calcular'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Medidas</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css?v=20261016">
     <script src="figuras.js" defer></script>
 </head>
 <body>
@@ -84,7 +84,9 @@ if (isset($_POST['calcular'])) {
             <small class="field-error" data-triangle-error><?= $errorTriangulo ?></small>
             <button type="submit" name="calcular">Calcular</button>
         </form>
-        <a class="back-link" href="index.html">Volver</a>
+        <nav class="result-actions" aria-label="Acciones de medidas">
+            <a class="button-link button-link-secondary" href="index.html">Volver</a>
+        </nav>
     </main>
 </body>
 </html>

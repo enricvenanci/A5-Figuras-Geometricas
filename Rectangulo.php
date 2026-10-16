@@ -28,6 +28,6 @@ class Rectangulo extends FiguraGeometrica{
     }
 
     public function __toString(){
-        return 'La longitud de los lados de este rectángulo es de  ' . $this->getLado1() . ' y ' . $this->getLado2() . ' cm.';
+        return 'La longitud de los lados de este rectángulo es de  ' . $this->getLado1() . ' cm' . ' y ' . $this->getLado2() . ' cm.';
     }
 }

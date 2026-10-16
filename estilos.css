@@ -33,6 +33,49 @@ button,
     padding: 8px 12px;
 }
 
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 1px solid #2563eb;
+    border-radius: 6px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.button-link:hover {
+    border-color: #1d4ed8;
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.button-link:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+.button-link-secondary {
+    border-color: #64748b;
+    background: #fff;
+    color: #334155;
+}
+
+.button-link-secondary:hover {
+    border-color: #475569;
+    background: #f1f5f9;
+}
+
 .field-error {
     color: red;
 }

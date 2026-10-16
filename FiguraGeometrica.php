@@ -36,7 +36,7 @@ class FiguraGeometrica{
     }
 
     public function __toString(){
-        return $this->getTipoFigura() . ' de medida ' . $this->getLado1();
+        return $this->getTipoFigura() . ' de medida ' . $this->getLado1() . ' cm.';
     }
 
 }
