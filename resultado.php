@@ -43,9 +43,9 @@ if ($tipo === 'Triangulo') {
     <header class="selection-header">Figura seleccionada: <strong><?= htmlspecialchars($figura->getTipoFigura(), ENT_QUOTES, 'UTF-8') ?></strong></header>
     <main class="card">
         <h1>Resultado</h1>
-        <p><?= htmlspecialchars($figura->__toString(), ENT_QUOTES, 'UTF-8') ?></p>
-        <p>Área: <strong><?= number_format($figura->calcularArea(), 2, ',', '.') ?></strong> cm²</p>
-        <p>Perímetro: <strong><?= number_format($figura->calcularPerimetro(), 2, ',', '.') ?></strong> cm</p>
+        <p class="result-summary"><?= htmlspecialchars($figura->__toString(), ENT_QUOTES, 'UTF-8') ?></p>
+        <p class="result-value">Área: <strong><?= number_format($figura->calcularArea(), 2, ',', '.') ?></strong> cm²</p>
+        <p class="result-value">Perímetro: <strong><?= number_format($figura->calcularPerimetro(), 2, ',', '.') ?></strong> cm</p>
         <nav class="result-actions" aria-label="Acciones del resultado">
             <a class="button-link" href="input.php">Cambiar medidas</a>
             <a class="button-link button-link-secondary" href="index.html">Elegir otra figura</a>
