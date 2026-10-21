@@ -1,67 +1,49 @@
 var selectorFigura = document.querySelector('#tipoFigura');
 
 if (selectorFigura) {
-    selectorFigura.onblur = validarSelectorFigura;
-}
-
-function validarSelectorFigura() {
-    var mensajeError = document.querySelector('[data-error-de="tipoFigura"]');
-
-    if (this.value === '') {
-        mensajeError.textContent = 'Selecciona una figura.';
-        this.setCustomValidity('Selecciona una figura.');
-    } else {
-        mensajeError.textContent = '';
-        this.setCustomValidity('');
-    }
-}
-
-var camposMedida = document.querySelectorAll('[data-medida]');
-
-for (var indice = 0; indice < camposMedida.length; indice++) {
-    camposMedida[indice].onblur = validarCampoMedida;
-}
-
-function validarCampoMedida() {
-    var campoActual = this;
-    var formularioMedidas = campoActual.form;
-    var mensajeError = formularioMedidas.querySelector('[data-error-de="' + campoActual.name + '"]');
-    var valorMedida = Number(campoActual.value);
-
-    if (campoActual.value === '' || !isFinite(valorMedida) || valorMedida <= 0) {
-        mensajeError.textContent = 'Introduce un número mayor que cero.';
-        campoActual.setCustomValidity('Introduce un número mayor que cero.');
-    } else {
-        mensajeError.textContent = '';
-        campoActual.setCustomValidity('');
-    }
-
-    if (formularioMedidas.getAttribute('data-figura') === 'Triangulo') {
-        validarLadosTriangulo(formularioMedidas);
-    }
-}
-
-function validarLadosTriangulo(formularioMedidas) {
-    var campoLadoUno = formularioMedidas.querySelector('[name="lado1"]');
-    var campoLadoDos = formularioMedidas.querySelector('[name="lado2"]');
-    var campoLadoTres = formularioMedidas.querySelector('[name="lado3"]');
-    var mensajeErrorTriangulo = formularioMedidas.querySelector('[data-error-triangulo]');
-    var ladoUno = Number(campoLadoUno.value);
-    var ladoDos = Number(campoLadoDos.value);
-    var ladoTres = Number(campoLadoTres.value);
-
-    mensajeErrorTriangulo.textContent = '';
-
-    if (campoLadoUno.value !== '' && isFinite(ladoUno) && ladoUno > 0) {
-        campoLadoUno.setCustomValidity('');
-    }
-
-    if (ladoUno > 0 && ladoDos > 0 && ladoTres > 0) {
-        if (ladoUno + ladoDos <= ladoTres
-            || ladoUno + ladoTres <= ladoDos
-            || ladoDos + ladoTres <= ladoUno) {
-            mensajeErrorTriangulo.textContent = 'Las medidas no forman un triángulo.';
-            campoLadoUno.setCustomValidity('Las medidas no forman un triángulo.');
+    selectorFigura.onblur = function () {
+        if (this.value === '') {
+            this.setCustomValidity('Selecciona una figura.');
+        } else {
+            this.setCustomValidity('');
         }
-    }
+    };
+}
+
+var campos = document.querySelectorAll('[data-medida]');
+
+for (var i = 0; i < campos.length; i++) {
+    campos[i].onblur = function () {
+        var campo = this;
+        var formulario = campo.form;
+        var valor = Number(campo.value);
+
+        if (campo.value === '' || valor <= 0) {
+            campo.setCustomValidity('Introduce un número mayor que cero.');
+        } else {
+            campo.setCustomValidity('');
+        }
+
+        if (formulario.getAttribute('data-figura') === 'Triangulo') {
+            var lado1 = formulario.querySelector('[name="lado1"]');
+            var lado2 = formulario.querySelector('[name="lado2"]');
+            var lado3 = formulario.querySelector('[name="lado3"]');
+            var numero1 = Number(lado1.value);
+            var numero2 = Number(lado2.value);
+            var numero3 = Number(lado3.value);
+
+            if (lado1.value !== '' && numero1 > 0) {
+                lado1.setCustomValidity('');
+            }
+
+            if (numero1 > 0 && numero2 > 0 && numero3 > 0) {
+                if (numero1 + numero2 <= numero3 || numero1 + numero3 <= numero2
+                    || numero2 + numero3 <= numero1) {
+                    lado1.setCustomValidity('Las medidas no forman un triángulo.');
+                } else {
+                    lado1.setCustomValidity('');
+                }
+            }
+        }
+    };
 }
