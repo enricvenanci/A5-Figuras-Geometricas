@@ -1,70 +1,67 @@
-'use strict';
+var selectorFigura = document.querySelector('#tipoFigura');
 
-var formularioSeleccion = document.querySelector('[data-selection-form]');
-
-if (formularioSeleccion) {
-    var selectorFigura = formularioSeleccion.querySelector('#tipoFigura');
-    var errorFigura = formularioSeleccion.querySelector('[data-error-for="tipoFigura"]');
-
-    formularioSeleccion.noValidate = true;
-    formularioSeleccion.addEventListener('submit', function (evento) {
-        if (selectorFigura.value === '') {
-            evento.preventDefault();
-            errorFigura.textContent = 'Selecciona una figura.';
-            selectorFigura.focus();
-        }
-    });
-
-    selectorFigura.addEventListener('change', function () {
-        errorFigura.textContent = '';
-    });
+if (selectorFigura) {
+    selectorFigura.onblur = validarSelectorFigura;
 }
 
-var formularioMedidas = document.querySelector('[data-measure-form]');
+function validarSelectorFigura() {
+    var mensajeError = document.querySelector('[data-error-de="tipoFigura"]');
 
-if (formularioMedidas) {
-    var camposMedida = formularioMedidas.querySelectorAll('[data-measure]');
-    var errorTriangulo = formularioMedidas.querySelector('[data-triangle-error]');
+    if (this.value === '') {
+        mensajeError.textContent = 'Selecciona una figura.';
+        this.setCustomValidity('Selecciona una figura.');
+    } else {
+        mensajeError.textContent = '';
+        this.setCustomValidity('');
+    }
+}
 
-    formularioMedidas.noValidate = true;
-    formularioMedidas.addEventListener('submit', function (evento) {
-        var primerCampoInvalido = null;
-        var valores = [];
+var camposMedida = document.querySelectorAll('[data-medida]');
 
-        for (var i = 0; i < camposMedida.length; i++) {
-            var campo = camposMedida[i];
-            var valor = Number(campo.value);
-            var campoInvalido = campo.value === '' || !isFinite(valor) || valor <= 0;
-            var errorCampo = formularioMedidas.querySelector(
-                '[data-error-for="' + campo.name + '"]'
-            );
+for (var indice = 0; indice < camposMedida.length; indice++) {
+    camposMedida[indice].onblur = validarCampoMedida;
+}
 
-            errorCampo.textContent = campoInvalido
-                ? 'Introduce un número mayor que cero.'
-                : '';
-            valores.push(valor);
+function validarCampoMedida() {
+    var campoActual = this;
+    var formularioMedidas = campoActual.form;
+    var mensajeError = formularioMedidas.querySelector('[data-error-de="' + campoActual.name + '"]');
+    var valorMedida = Number(campoActual.value);
 
-            if (campoInvalido && primerCampoInvalido === null) {
-                primerCampoInvalido = campo;
-            }
+    if (campoActual.value === '' || !isFinite(valorMedida) || valorMedida <= 0) {
+        mensajeError.textContent = 'Introduce un número mayor que cero.';
+        campoActual.setCustomValidity('Introduce un número mayor que cero.');
+    } else {
+        mensajeError.textContent = '';
+        campoActual.setCustomValidity('');
+    }
+
+    if (formularioMedidas.getAttribute('data-figura') === 'Triangulo') {
+        validarLadosTriangulo(formularioMedidas);
+    }
+}
+
+function validarLadosTriangulo(formularioMedidas) {
+    var campoLadoUno = formularioMedidas.querySelector('[name="lado1"]');
+    var campoLadoDos = formularioMedidas.querySelector('[name="lado2"]');
+    var campoLadoTres = formularioMedidas.querySelector('[name="lado3"]');
+    var mensajeErrorTriangulo = formularioMedidas.querySelector('[data-error-triangulo]');
+    var ladoUno = Number(campoLadoUno.value);
+    var ladoDos = Number(campoLadoDos.value);
+    var ladoTres = Number(campoLadoTres.value);
+
+    mensajeErrorTriangulo.textContent = '';
+
+    if (campoLadoUno.value !== '' && isFinite(ladoUno) && ladoUno > 0) {
+        campoLadoUno.setCustomValidity('');
+    }
+
+    if (ladoUno > 0 && ladoDos > 0 && ladoTres > 0) {
+        if (ladoUno + ladoDos <= ladoTres
+            || ladoUno + ladoTres <= ladoDos
+            || ladoDos + ladoTres <= ladoUno) {
+            mensajeErrorTriangulo.textContent = 'Las medidas no forman un triángulo.';
+            campoLadoUno.setCustomValidity('Las medidas no forman un triángulo.');
         }
-
-        var trianguloInvalido = false;
-
-        if (formularioMedidas.getAttribute('data-shape') === 'Triangulo'
-            && primerCampoInvalido === null) {
-            trianguloInvalido = valores[0] + valores[1] <= valores[2]
-                || valores[0] + valores[2] <= valores[1]
-                || valores[1] + valores[2] <= valores[0];
-        }
-
-        errorTriangulo.textContent = trianguloInvalido
-            ? 'Las medidas no forman un triángulo.'
-            : '';
-
-        if (primerCampoInvalido !== null || trianguloInvalido) {
-            evento.preventDefault();
-            (primerCampoInvalido || camposMedida[0]).focus();
-        }
-    });
+    }
 }

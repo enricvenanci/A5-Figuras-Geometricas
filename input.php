@@ -67,21 +67,21 @@ if (isset($_POST['calcular'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Medidas</title>
     <link rel="stylesheet" href="estilos.css?v=20261016">
-    <script src="figuras.js?v=20261016-validacion-simple" defer></script>
+    <script src="figuras.js?v=20261021-onblur" defer></script>
 </head>
 <body>
     <header class="selection-header">Figura seleccionada: <strong><?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?></strong></header>
     <main class="card">
         <h1>Introduce las medidas</h1>
-        <form method="post" action="input.php" data-measure-form data-shape="<?= htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') ?>">
+        <form method="post" action="input.php" data-figura="<?= htmlspecialchars($tipo, ENT_QUOTES, 'UTF-8') ?>">
             <?php foreach ($campos as $campo => $etiqueta): ?>
                 <label for="<?= $campo ?>"><?= $etiqueta ?></label>
                 <input id="<?= $campo ?>" name="<?= $campo ?>" type="number" min="0" step="any"
                     value="<?= htmlspecialchars(isset($lados[$campo]) ? $lados[$campo] : '', ENT_QUOTES, 'UTF-8') ?>"
-                    required data-measure>
-                <small class="field-error" data-error-for="<?= $campo ?>"><?= isset($errores[$campo]) ? $errores[$campo] : '' ?></small>
+                    required data-medida>
+                <small class="field-error" data-error-de="<?= $campo ?>"><?= isset($errores[$campo]) ? $errores[$campo] : '' ?></small>
             <?php endforeach; ?>
-            <small class="field-error" data-triangle-error><?= $errorTriangulo ?></small>
+            <small class="field-error" data-error-triangulo><?= $errorTriangulo ?></small>
             <button type="submit" name="calcular">Calcular</button>
         </form>
         <nav class="result-actions" aria-label="Acciones de medidas">
